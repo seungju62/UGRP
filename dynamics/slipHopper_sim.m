@@ -1,11 +1,11 @@
-function slipHopper_length
+function slipHopper_sim
 
 clc
 clear all
 close all
 format short
 
-% initial parameters (set 1)
+% initial parameters
  robot.g = 10;
  robot.ground = 0;
  robot.l = 0.4;
@@ -41,12 +41,10 @@ animate(t,z,robot,steps,fps);
 
 %===================================================================
 function zdiff=fixedpt(z0,robot)
-%===================================================================
 zdiff=onestep(z0,robot)-z0; 
 
 %===================================================================
 function J=partialder(FUN,z,robot)
-%===================================================================
 pert=1e-5;
 n = length(z);
 J = zeros(n,n);
@@ -61,7 +59,6 @@ J=J/(2*pert);
 
 %===================================================================
 function [z,t]=onestep(z0,robot,steps,fps)
-%===================================================================
 flag = 1;
 if nargin<2
     error('need more inputs to onestep');
@@ -185,19 +182,16 @@ end
 
 %===================================================================
 function zdot=flight(t,z,robot)  
-%===================================================================
 zdot = [z(2) 0 z(4) -robot.g]';
 
 %===================================================================
 function [gstop, isterminal,direction]=contact(t,z,robot)
-%===================================================================
 gstop = z(3) - robot.l*cos(robot.control.theta); %position is 0;
 direction = -1; %negative direction goes from + to -
 isterminal = 1;  %1 is stop the integration
 
 %===================================================================
 function zdot=stance(t,z,robot)  
-%===================================================================
 x = z(1); y = z(3); %x & y position of com wrt ground
 l = sqrt(x^2+y^2);
 F_spring = robot.control.k*(robot.l-l);
@@ -210,7 +204,6 @@ zdot = [z(2) xddot z(4) yddot]';
 
 %===================================================================
 function [gstop, isterminal,direction]=release(t,z,robot)
-%===================================================================
 l = sqrt(z(1)^2+z(3)^2);
 gstop = l-robot.l;
 direction = 1; %negative direction goes from + to -
@@ -218,15 +211,12 @@ isterminal = 1;  %1 is stop the integration
 
 %===================================================================
 function [gstop, isterminal,direction]=apex(t,z,robot)
-%===================================================================
 gstop = z(4) - 0; %ydot is 0;
 direction = 0; %negative direction goes from + to -
 isterminal = 1;  %1 is stop the integration
 
 %===================================================================
 function animate(t_all,z_all,robot,steps,fps)
-%===================================================================
-
 %%% interpolate for animation %%
 [t_interp,z_interp] = loco_interpolate(t_all,z_all,fps);
 
@@ -265,7 +255,6 @@ end
 
 %===================================================================
 function [t_interp,z_interp] = loco_interpolate(t_all,z_all,fps)
-%===================================================================
 [m,n] = size(z_all);
 t_interp = linspace(t_all(1),t_all(end),fps*(t_all(end)-t_all(1)));
 
@@ -277,7 +266,6 @@ t_interp = t_interp';
 
 %===================================================================
 function manipulator(th1,th2)
-%===================================================================
 % Length of links (m)
 l1 = 0.3;
 l2 = 0.3;
@@ -302,18 +290,15 @@ for i = 1:length(th1)
 txt1 = ['θ1 = ' , num2str(theta1) , ' deg'];
 txt2 = ['θ2 = ' , num2str(theta2) , ' deg'];
 txtend = ['x2 = ' , num2str(x2) , ' , ' , 'y2 = ' , num2str(y2)];
- % Plot:
+
+ % Plotting now:
  
  plot([x0 x1],[y0 y1],[x1 x2],[y1 y2],'linewidth',5)
  xlabel('X-axis (m)')
  ylabel('Y-axis (m)')
-%  title('Forward Kinematics of 2R robotic arm')
   text(x0,y0,txt1,'VerticalAlignment','top')
   text(x1,y1,txt2,'VerticalAlignment','top')
  
-% text(x2,y2,txtend,'HorizontalAlignment','left','VerticalAlignment','bottom')
-%  text(0.5*(x0+x1),0.5*(y0+y1),' Link 1')
-%  text(0.5*(x1+x2),0.5*(y1+y2),' Link 2')
  grid on
  axis([-1 2 -0.5 2])
  pause(0.01)
