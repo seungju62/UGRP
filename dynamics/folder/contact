@@ -1,0 +1,4 @@
+function [gstop, isterminal,direction]=contact(t,z,robot)
+gstop = z(3) - robot.l*cos(robot.control.theta); %position is 0;
+direction = -1; %negative direction goes from + to -
+isterminal = 1;  %1 is stop the integration
