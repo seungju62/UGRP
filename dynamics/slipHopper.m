@@ -1,25 +1,24 @@
-function slipHopper_length_
+function slipHopper_length
 
 clc
 clear all
 close all
 format long
 
-% %%% initial parameters (set 1)
- robot.g = 10;%gravity acc
- robot.ground = 0; %ground is at y co-ordinate equal to robot.ground
- robot.l = 0.4;%leg length
- robot.m = 1;%mass
- robot.control.k = 500;%spring constant
- robot.control.theta  = 0*(pi/180); %pi/6; %angle between leg and vertical
- x0dot = 0	;% 0.5;  
- y0 = 0.6	;%maximun hight
+% initial parameters
+ robot.g = 10;
+ robot.ground = 0;
+ robot.l = 0.4;
+ robot.m = 1;
+ robot.control.k = 500;
+ robot.control.theta  = 0*(pi/180);
+ x0dot = 0;
+ y0 = 0.6;
 
 
 % initial guess
 z0 = [x0dot y0];
 
-% %%%%%%%%%%%%%%%%%%%%%%%%%
 steps = 5; %number of steps to animate
 fps = 30; %Use low frames per second for low gravity
 
@@ -53,14 +52,12 @@ animate(t,z,robot,steps,fps);
 
 %===================================================================
 function zdiff=fixedpt(z0,robot)
-%===================================================================
 zdiff=onestep(z0,robot)-z0; 
 %disp('zdiff')
 %disp(zdiff)
 
 %===================================================================
 function J=partialder(FUN,z,robot)
-%===================================================================
 pert=1e-5;
 n = length(z);
 J = zeros(n,n);
@@ -76,8 +73,6 @@ J=J/(2*pert);
 
 %===================================================================
 function [z,t]=onestep(z0,robot,steps,fps)  %DONE
-%===================================================================
-
 flag = 1;
 if nargin<2
     error('need more inputs to onestep');
@@ -173,19 +168,16 @@ end
 
 %===================================================================
 function zdot=flight(t,z,robot)  
-%===================================================================
 zdot = [z(2) 0 z(4) -robot.g]';
 
 %===================================================================
 function [gstop, isterminal,direction]=contact(t,z,robot)
-%===================================================================
 gstop = z(3) - robot.l*cos(robot.control.theta); %position is 0;
 direction = -1; %negative direction goes from + to -
 isterminal = 1;  %1 is stop the integration
 
 %===================================================================
 function zdot=stance(t,z,robot)  
-%===================================================================
 x = z(1); y = z(3); %x & y position of com wrt ground
 l = sqrt(x^2+y^2);
 F_spring = robot.control.k*(robot.l-l);
@@ -198,7 +190,6 @@ zdot = [z(2) xddot z(4) yddot]';
 
 %===================================================================
 function [gstop, isterminal,direction]=release(t,z,robot)
-%===================================================================
 l = sqrt(z(1)^2+z(3)^2);
 gstop = l-robot.l;
 direction = 1; %negative direction goes from + to -
@@ -206,16 +197,12 @@ isterminal = 1;  %1 is stop the integration
 
 %===================================================================
 function [gstop, isterminal,direction]=apex(t,z,robot)
-%===================================================================
 gstop = z(4) - 0; %ydot is 0;
 direction = 0; %negative direction goes from + to -
 isterminal = 1;  %1 is stop the integration
 
 %===================================================================
-%===================================================================
 function animate(t_all,z_all,robot,steps,fps)
-%===================================================================
-
 %%% interpolate for animation %%
 [t_interp,z_interp] = loco_interpolate(t_all,z_all,fps);
 
@@ -254,7 +241,6 @@ end
 
 %===================================================================
 function [t_interp,z_interp] = loco_interpolate(t_all,z_all,fps)
-%===================================================================
 [m,n] = size(z_all);
 t_interp = linspace(t_all(1),t_all(end),fps*(t_all(end)-t_all(1)));
 
