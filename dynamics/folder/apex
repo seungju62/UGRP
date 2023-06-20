@@ -1,0 +1,4 @@
+function [gstop, isterminal,direction]=apex(t,z,robot)
+gstop = z(4) - 0; %ydot is 0;
+direction = 0; %negative direction goes from + to -
+isterminal = 1;  %1 is stop the integration
