@@ -1,4 +1,4 @@
-function slipHopper_length
+function slipHopper
 
 clc
 clear all
