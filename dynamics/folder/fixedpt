@@ -1,0 +1,4 @@
+function zdiff=fixedpt(z0,robot)
+zdiff=onestep(z0,robot)-z0; 
+%disp('zdiff')
+%disp(zdiff)
