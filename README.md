@@ -9,8 +9,9 @@ Undergraduate Group Research Program
    - one_way.ino : 아두이노에서 모터로 명령어 보내기 (CAN shield의 조이스틱을 이용하여 모터 돌리기)
    - two_way.ino : 아두이노에서 모터로 명령어 보내고, 모터에서 값을 받아서 아두이노에서 출력
   ## 1.2 uno2matlab
-     - 01 - sending data : 매트랩에서 아두이노로 숫자 데이터 보내기 (아두이노에서 serial port를 열 수 없기 때문에 매트랩에서 값을 다시 받아 출력)
-     - 02 - sending separately : motor1, motor2에 각각 다른 값을 보내기 위한 코드 (매트랩에서 하나의 데이터로 모아서 보낸 후, 아두이노에서 각각 나누어 저장)
+    - 01 - sending data : 매트랩에서 아두이노로 숫자 데이터 보내기 (아두이노에서 serial port를 열 수 없기 때문에 매트랩에서 값을 다시 받아 출력)
+    - 02 - sending separately : motor1, motor2에 각각 다른 값을 보내기 위한 코드 (매트랩에서 하나의 데이터로 모아서 보낸 후, 아두이노에서 각각 나누어 저장)
+
 # 2. dynamics
   - SLIP_sim(1).m : SLIP model 뛰는 모습 그려줌
   - SLIP_sim(2).m : SLIP model에 따른 two-link 다리 움직임 그려줌 (각도 출력) -> 각도 제대로 출력되는 코드 맞음?(joint2 = theta2-theta1...)
