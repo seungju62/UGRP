@@ -1,2 +1,0 @@
-function zdot=flight(t,z,robot)  
-zdot = [z(2) 0 z(4) -robot.g]';
