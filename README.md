@@ -1,6 +1,5 @@
 # UGRP
 Undergraduate Group Research Program
-여기에 그냥 정리하면 되는 걸까요?
 
 ## 1. control
   ### 1.1 CAN (모터를 구동하기 위한 아두이노-모터 사이의 CAN 통신 설정)
