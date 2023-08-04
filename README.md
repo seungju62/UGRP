@@ -10,6 +10,7 @@ Undergraduate Group Research Program
    - two_way.ino : 아두이노에서 모터로 명령어 보내고, 모터에서 값을 받아서 아두이노에서 출력
      
   ## 1.2 uno2matlab
+    - 잘 모르겠음
     - 01 - sending data : 매트랩에서 아두이노로 숫자 데이터 보내기 (아두이노에서 serial port를 열 수 없기 때문에 매트랩에서 값을 다시 받아 출력)
     - 02 - sending separately : motor1, motor2에 각각 다른 값을 보내기 위한 코드 (매트랩에서 하나의 데이터로 모아서 보낸 후, 아두이노에서 각각 나누어 저장)
 
