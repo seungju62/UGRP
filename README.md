@@ -21,5 +21,5 @@ Undergraduate Group Research Program
   - 01 - sending num : [1,2,3,4] 이런 간단한 숫자 보내면서 모터 잘 돌아가는지 확인
   - 02 - sending theta1 : SLIP_sim 파일에서 필요한 각도 받아와 motor 하나에다가 보내기
 
-## 임의로 올린 파일
+## 임시로 올린 파일
   - motor_r4.ino : arduino uno r4 wifi -> CAN 통신 시도 중 ... 해 오기!!! (https://docs.arduino.cc/tutorials/uno-r4-wifi/can)
