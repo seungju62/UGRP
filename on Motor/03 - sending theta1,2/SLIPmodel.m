@@ -8,9 +8,9 @@ format long
 %% initial parameters
 robot.g = 9.81;
 robot.ground = 0;
-robot.l = 0.4;
+robot.l = 0.35;
 robot.m = 2;
-robot.control.k = 200;
+robot.control.k = 300;
 robot.control.theta  = 0*(pi/180);
 x0dot = 0.0; 
 y0 = 0.6;
@@ -22,8 +22,8 @@ dt = 5;
 
 robot.check = 0;
 
-robot.l1 = 0.3;
-robot.l2 = 0.3;
+robot.l1 = 0.2;
+robot.l2 = 0.2;
 
 %% Root finding
 options = optimset('TolFun',1e-10,'TolX',1e-10,'Display','iter');
@@ -52,21 +52,20 @@ result.foot_y = z(:,6);
 
 result.len = sqrt((result.x_pos-result.foot_x).^2 + (result.y_pos-result.foot_y).^2);
 
-result.theta1 = acos((robot.l2^2-robot.l1^2-result.len.^2)./(2*result.len*robot.l1));
-result.theta2 = acos((result.len.^2-robot.l1^2-robot.l2^2)./(2*robot.l1*robot.l2));
-result.theta3 = result.theta2-result.theta1;
+result.theta1 = acos((-robot.l2^2+robot.l1^2+result.len.^2)./(2*result.len*robot.l1));
+result.theta2 = pi-result.theta1*2;
+% result.theta2 = acos((-result.len.^2+robot.l1^2+robot.l2^2)./(2*robot.l1*robot.l2));
 
-th1 = -result.theta1;
-th2 = result.theta3;
-% joint1 = th1 + result.theta1(1,1);
-% joint2 = -(th2-result.theta3(1,1));
+%% for manipulator
+th1 = result.theta1;
+th2 = result.theta2;
 
 %% for motor
 joint1 = result.theta1 - result.theta1(1,1);
-joint2 = result.theta2 - result.theta2(1,1);
+joint2 = - result.theta2 + result.theta2(1,1);
 
 %% Test
-% manipulator(robot, result.theta1, result.theta3)
+% manipulator(robot, th1, th2)
 % animate(t,z,robot,steps,fps);
 
 %% functions
@@ -264,8 +263,8 @@ end
 function manipulator(robot, th1,th2)
 ct = 1;
 for i = 1:length(th1)
-    theta1 = th1(i)*180/3.14;
-    theta2 = th2(i)*180/3.14;
+    theta1 = 90-rad2deg(th1(i));
+    theta2 = 180-rad2deg(th2(i));
 
     % Initial point of link 1
     x0 = 0;
@@ -279,8 +278,8 @@ for i = 1:length(th1)
     x2 = x1 + robot.l2*cosd(theta1+theta2);
     y2 = y1 + robot.l2*sind(theta1+theta2);
      
-    txt1 = ['罐1 = ' , num2str(theta1) , ' deg'];
-    txt2 = ['罐2 = ' , num2str(theta2) , ' deg'];
+    txt1 = ['th1 = ' , num2str(90-theta1) , ' deg'];
+    txt2 = ['th2 = ' , num2str(180-theta2) , ' deg'];
      
     plot([x0 x1],[y0 y1],[x1 x2],[y1 y2],'linewidth',5)
     xlabel('X-axis (m)')
