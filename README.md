@@ -22,7 +22,7 @@ Undergraduate Group Research Program
   - 01 - sending num : [1,2,3,4] 이런 간단한 숫자 보내면서 모터 잘 돌아가는지 확인
   - 02 - sending theta1 : SLIP_sim 파일에서 필요한 각도 받아와 motor 하나에다가 보내기
   - 03 - sending theta1,2 : uno2matlab/02 - sending separately 이용해서 theta1, theta2 각각의 모터에게 전송 (다리 길이 0.2, 0.2m로 수정, 최대한 굽혔다가 펼 수 있도록 K 조정)
-  - <U>04 - sending jump_al : 점프하는 동작에 대한 움직임만 명령을 줌 / 점프하는 시간.. 동안에 대해서는 아래 Sensor/TouchSensor 로 잇기 (진행 중)<U>
+  - 04 - sending jump_al : 점프하는 동작에 대한 움직임만 명령을 줌 / 점프하는 시간.. 동안에 대해서는 아래 Sensor/TouchSensor 로 잇기 **(진행 중)**
 
 ## 4. test Motor
   - 01 - sending num : 그냥 모터 켜지는지 보기 위해 아두이노만을 가지고 모터 돌리기 (position / velocity 입력)
@@ -33,7 +33,7 @@ Undergraduate Group Research Program
   ### TouchSensor
   - 01 - touch_sensor : 접촉감지센서(RA12P)에서 값 받기 (https://www.devicemart.co.kr/goods/view?no=1327467)
   - 02 - touch_sensor(1) : 1) 바닥에 접촉 시(A0) 점프를 위한 명령어 주기
-                             2) over spread(A1) / over bend(A2) 시 모터 stop or off (진행 중)
+                             2) over spread(A1) / over bend(A2) 시 모터 stop or off **(진행 중)**
     
 ## arduino_r4 (사용 X)
   - arduino_r4_can.ino : can 통신 등 시도..
