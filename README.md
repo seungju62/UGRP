@@ -21,8 +21,8 @@ Undergraduate Group Research Program
   - library : control/CAN/two_way.ino 파일을 수정하여  move(motor_id, pos, vel, Kp, Kd, Cur)만 입력하면 동작하도록 라이브러리로 만듦
   - 01 - sending num : [1,2,3,4] 이런 간단한 숫자 보내면서 모터 잘 돌아가는지 확인
   - 02 - sending theta1 : SLIP_sim 파일에서 필요한 각도 받아와 motor 하나에다가 보내기
-  - 03 - sending theta1,2 : uno2matlab/02 - sending separately 이용해서 theta1, theta2 각각의 모터에게 전송
-    (값은 옳게 출력되는 것 같은데, 모터가 값대로 움직이지 않음. 갑자기 급발진함 / theta1은 각도 범위가 너무 작은 것 같기도 함.) 
+  - 02(1) - sending theta1 : 02와 유사하나, CAN-Bus shield 바꾼 후 사용 가능 (joystick 없음) 
+  - 03 - sending theta1,2 : uno2matlab/02 - sending separately 이용해서 theta1, theta2 각각의 모터에게 전송 (다리 길이 0.2, 0.2m로 수정, 최대한 굽혔다가 펼 수 있도록 K 조정)
 
 ## arduino_r4 (사용 X)
   - arduino_r4_can.ino : can 통신 등 시도..
