@@ -29,6 +29,7 @@ Undergraduate Group Research Program
   - 01 - sending num : 그냥 모터 켜지는지 보기 위해 아두이노만을 가지고 모터 돌리기 (position / velocity 입력)
   - 02 - sending num(1) : 값 하나 보냄 (library 사용 X 그냥 다 적혀있음)
   - 03 - sending num(2) : 값 두 개 보냄 (library 사용 X 그냥 다 적혀있음)
+  - 04 - OnlyArduino : 매트랩 사용하지 않고 아두이노로만 모터 구동하기 **(진행 중)**
 
 ## 5. Sensor
   ### TouchSensor
