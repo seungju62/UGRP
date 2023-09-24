@@ -34,11 +34,7 @@ if exitflag == 1
 else
     error('Root finder not converged, change guess or change system parameters')
 end
- 
-%% Stability, using eigenvalues
-J=partialder(@onestep,zstar,robot);
-disp('EigenValues for linearized map are');
-eig(J)
+
  
 %% Get data for all the steps
 [z,t] = onestep(zstar,robot,steps,fps);
