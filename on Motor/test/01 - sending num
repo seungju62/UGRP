@@ -1,0 +1,27 @@
+#include <Canbus.h>
+#include <defaults.h>
+#include <global.h>
+#include <mcp2515.h>
+#include <mcp2515_defs.h>
+#include "ht8108_v2.h"
+
+int id = 4;
+
+void setup() {
+  Serial.begin(115200);
+
+  if(Canbus.init(CANSPEED_1000))  //CAN Speed 1000kbps
+    Serial.println("CAN Init ok");
+  else
+    Serial.println("Can't init CAN");
+
+  delay(500);
+  onMotor(id);
+  delay(500);
+  zero(id);
+  delay(500);
+}
+
+void loop() {
+    runMotor(id, 0, 0.5, 5, 0.2, 0);
+}
