@@ -31,9 +31,9 @@ Undergraduate Group Research Program
 
 ## 5. Sensor
   ### TouchSensor
-    - 01 - touch_sensor : 접촉감지센서(RA12P)에서 값 받기 (https://www.devicemart.co.kr/goods/view?no=1327467)
-    - <U>02 - touch_sensor(1) : 1) 바닥에 접촉 시(A0) 점프를 위한 명령어 주기
-                             2) over spread(A1) / over bend(A2) 시 모터 stop or off (진행 중)<U>
+  - 01 - touch_sensor : 접촉감지센서(RA12P)에서 값 받기 (https://www.devicemart.co.kr/goods/view?no=1327467)
+  - 02 - touch_sensor(1) : 1) 바닥에 접촉 시(A0) 점프를 위한 명령어 주기
+                             2) over spread(A1) / over bend(A2) 시 모터 stop or off (진행 중)
     
 ## arduino_r4 (사용 X)
   - arduino_r4_can.ino : can 통신 등 시도..
