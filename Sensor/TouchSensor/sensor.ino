@@ -22,10 +22,16 @@ int in2 = A2;
 void setup() {
 
   Serial.begin(115200);                           // 시리얼 통신 설정 (보드레이트 9600)
-  // onMotor(id1);
-  // onMotor(id2);
-  // delay(1000);
 
+  if(Canbus.init(CANSPEED_1000))  //CAN Speed 1000kbps
+    Serial.println("CAN Init ok");
+  else
+    Serial.println("Can't init CAN");
+  delay(1000);
+  
+  onMotor(id1);
+  onMotor(id2);
+  delay(1000);
 
   delay(1000);
 }
