@@ -24,7 +24,7 @@ Undergraduate Group Research Program
   - 03 - sending theta1,2 : uno2matlab/02 - sending separately 이용해서 theta1, theta2 각각의 모터에게 전송 (다리 길이 0.2, 0.2m로 수정, 최대한 굽혔다가 펼 수 있도록 K 조정)
   - 04 - sending jump : 점프하는 동작에 대한 움직임만 명령을 줌 / 점프하는 시간.. 동안에 대해서는 아래 Sensor/TouchSensor 로 잇기
                       : 그러면... 아직 센서 붙여보기 전에는 -> 값 주고 / delay를 주고? (matlab에서 pause로 조절)
-  - 05 - OnlyArduino : 매트랩 사용하지 않고 아두이노로만 모터 구동하기
+  - 05 - OnlyArduino : 매트랩 사용하지 않고 아두이노로만 모터 구동하기 **-> 되긴 했는데, setup에 onMotor, Zero를 주석처리하지 않으면 안되길래,, 모터에 연결해서 확인해 봐야 할 것 같음!**
 
 ## 4. test Motor
   - 01 - sending num : 그냥 모터 켜지는지 보기 위해 아두이노만을 가지고 모터 돌리기 (position / velocity 입력)
