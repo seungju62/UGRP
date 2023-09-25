@@ -10,9 +10,9 @@ void setup() {
 
 void loop(){
 
-  sensor0 = analogRead(in0);     // 센서값을 아나로그로 읽어 value 변수에 저장
-  sensor1 = analogRead(in1);
-  sensor2 = analogRead(in2);
+  int sensor0 = analogRead(in0);     // 센서값을 아나로그로 읽어 value 변수에 저장
+  int sensor1 = analogRead(in1);
+  int sensor2 = analogRead(in2);
   
   Serial.println(sensor0);                           // 센서값을 시리얼 모니터에 출력
   delay(10);                                         // 0.01초의 딜레이
