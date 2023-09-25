@@ -14,8 +14,8 @@ int idx = 0;
 float joint1_float;
 float joint2_float;
 
-int id1 = 5;
-int id2 = 6;
+int id1 = 6;
+int id2 = 5;
 
 void setup() {
  
@@ -65,7 +65,7 @@ void loop() {
         // Serial.println(joint2_float);
         
         // delay(1000);
-        runMotor(id1, joint1_float, 0, 1, 0.2, 0);
+        runMotor(id1, -joint1_float, 0, 1, 0.2, 0);
         runMotor(id2, joint2_float, 0, 1, 0.2, 0);
         // delay(1000);  
         // offMotor(2);  
