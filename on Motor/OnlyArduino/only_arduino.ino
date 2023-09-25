@@ -33,8 +33,11 @@ void loop() {
     String theta = joint_txt.substring(i*7, i*7+6);
     joint1_float = -theta.toFloat();
     joint2_float = theta.toFloat()*2;
-
-    Serial.println(joint1_float);
+    
+    runMotor(id1, joint1_float, 0, 1, 0.2, 0);
+    runMotor(id2, joint2_float, 0, 1, 0.2, 0);
+    
     delay(100);
   }
+  delay(3000);
 }
