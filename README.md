@@ -2,19 +2,6 @@
 Undergraduate Group Research Program
 
 ## Diagram
-   |----------|
-   
- 12|    앞    |65
- 
-   |          |
-   
-   |왼      오|
-   
-   |          |
-   
- 34|    뒤    |87
- 
-   |----------|
 
 ## 1. control
   ### 1.1 CAN (모터를 구동하기 위한 아두이노-모터 사이의 CAN 통신 설정)
