@@ -2,7 +2,7 @@
 Undergraduate Group Research Program
 
 ## Diagram
-   |----------|
+   |----------| \n
  12|    앞    |65
    |          |
    |왼      오|
