@@ -2,12 +2,18 @@
 Undergraduate Group Research Program
 
 ## Diagram
-   |----------| \n
+   |----------|
+   
  12|    앞    |65
+ 
    |          |
+   
    |왼      오|
+   
    |          |
+   
  34|    뒤    |87
+ 
    |----------|
 
 ## 1. control
