@@ -38,7 +38,7 @@ Undergraduate Group Research Program
                              2) over spread(A1) / over bend(A2) 시 모터 stop or off
   ### GyroSensor
 
-## 6. TEST
+## 6. TEST (The Newest)
   - 01 - one_leg.ino : 약간 수정을 했기 때문에 첨부. 가장 최신 파일
   - 02 - four_legs.ino : 다리 4개를 모두 동시에 구동하기 위한 코드 작성. **아직 테스트 해보지 못함.**
   - JumpingModel.m : 로봇의 다리 길이 수정 (thigh 0.2m, calf 0.25m)
