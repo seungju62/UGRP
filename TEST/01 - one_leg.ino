@@ -59,7 +59,7 @@ for (int step=0 ; step<3 ; step++)
 
     // joint1_float = -theta.toFloat();
     joint1_float = -theta1.toFloat()*1.3 +offset;
-    joint2_float = theta2.toFloat()*2*1.3;
+    joint2_float = theta2.toFloat()*1.3;
     
     // 왼쪽다리 (-)
     // 오른쪽다리 (+)
