@@ -1,0 +1,124 @@
+// Instruction for 4-legged jumping robot
+// Date : 2023. 10. 25
+
+// id 기준이 아니라, 그냥 위치 기준!!
+// 나머지는 같음 // 3번 : id4, 4번 : id3
+//   |----------|
+// 12|    앞    |65
+//   |          |
+//   |왼      오|
+//   |          |
+// 34|    뒤    |87
+//   |----------|
+
+// direction of the motor
+// cw (+) ccw (-)
+
+// offset
+// 2,4 (-) 6,8 (+)
+
+// jumping
+// inner(골반) : 2,4 (+) 6,8 (-)
+// outer(무릎) : 1,3 (-) 5,7 (+)
+
+#include <Canbus.h>
+#include <defaults.h>
+#include <global.h>
+#include <mcp2515.h>
+#include <mcp2515_defs.h>
+#include "ht8108_v2.h"
+
+String joint_txt1 = "0.0000,0.0295,0.0584,0.0869,0.1149,0.1426,0.1700,0.1972,0.2241,0.2510,0.2777,0.3044,0.3311,0.3578,0.3847,0.4117,0.4389,0.4664,0.4942,0.5225,0.5512,0.5805,0.6106,0.6414,0.6732,0.7060,0.7402,0.7760,0.8136,0.8524,0.8542,0.8561,0.8579,0.8598,0.8616,0.8635,0.8654,0.8672,0.8691,0.8710,0.8729,0.8748,0.8767,0.8786,0.8806,0.8825,0.8844,0.8864,0.8883,0.8903,0.8922,0.8942,0.8961,0.8981,0.9001,0.9021,0.9041,0.9061,0.9081";
+String joint_txt2 = "0.0000,0.0494,0.0974,0.1443,0.1902,0.2351,0.2791,0.3223,0.3647,0.4065,0.4476,0.4882,0.5282,0.5678,0.6069,0.6455,0.6838,0.7218,0.7594,0.7967,0.8337,0.8706,0.9072,0.9436,0.9799,1.0161,1.0522,1.0883,1.1244,1.1598,1.1614,1.1630,1.1646,1.1663,1.1679,1.1695,1.1712,1.1728,1.1744,1.1761,1.1777,1.1793,1.1809,1.1826,1.1842,1.1858,1.1875,1.1891,1.1907,1.1924,1.1940,1.1956,1.1973,1.1989,1.2005,1.2022,1.2038,1.2055,1.2071";
+
+int last1 = 0.9081;
+int last2 = 1.2071;
+
+int id1 = 1; int id2 = 2;
+int id3 = 4; int id4 = 3;
+int id5 = 5; int id6 = 6;
+int id7 = 7; int id8 = 8;
+
+int offset = 0.25;
+
+float joint1_float;
+float joint2_float;
+
+void setup() {
+  pintMode(swtch, INPUT_PULLUP)
+  Serial.begin(115200);
+
+  if(Canbus.init(CANSPEED_1000))
+    Serial.println("CAN Init ok");
+  else
+    Serial.println("Can't init CAN");
+  delay(1000);
+
+//  Serial.println('-------offMotor-------');
+  offMotor(id1); offMotor(id2);
+  offMotor(id3); offMotor(id4);
+  offMotor(id5); offMotor(id6);
+  offMotor(id7); offMotor(id8);
+  delay(1000);
+
+  Serial.println('-------onMotor-------');
+  onMotor(id1); onMotor(id2);
+  onMotor(id3); onMotor(id4);
+  onMotor(id5); onMotor(id6);
+  onMotor(id7); onMotor(id8);
+  delay(2000);
+
+  Serial.println('-------Zero-------');
+  zero(id1); zero(id2);
+  zero(id3); zero(id4);
+  zero(id5); zero(id6);
+  zero(id7); zero(id8);
+  delay(2000);
+
+  Serial.println('------offset------');
+  for (int o=0 ; o<5 ; o++)
+  {
+  runMotor(id2, -offset/5*o, 0, 40, 2, 0); runMotor(id4, -offset/5*o, 0, 40, 2, 0);
+  runMotor(id6, offset/5*o, 0, 40, 2, 0); runMotor(id8, offset/5*o, 0, 40, 2, 0);
+  runMotor(id1, 0, 0, 40, 2, 0); runMotor(id3, 0, 0, 40, 2, 0);
+  runMotor(id5, 0, 0, 40, 2, 0); runMotor(id7, 0, 0, 40, 2, 0);
+  }
+  delay(1000);
+}
+
+void loop() {
+  Serial.println('----------LET'S JUMP !!-------------');
+  int t = 3;      // time stamp
+  int scale = 1;  // multiple the scale
+                  // 7 : number of strings
+
+    for (int i=0 ; i<59 ; i++)
+    {
+      String theta1 = joint_txt1.substring(i*t*7, i*t*7+6);
+      String theta2 = joint_txt2.substring(i*t*7, i*t*7+6);
+
+      joint1 = theta1.toFloat()*scale +offset;
+      joint2 = theta2.toFloat()*scale;
+      
+      runMotor(id1, -joint1, 0, 40, 2, 0);  runMotor(id3, -joint1, 0, 40, 2, 0);
+      runMotor(id5, joint1, 0, 40, 2, 0);   runMotor(id7, joint1, 0, 40, 2, 0);
+      runMotor(id2, joint2, 0, 40, 2, 0);   runMotor(id4, joint2, 0, 40, 2, 0);
+      runMotor(id6, -joint2, 0, 40, 2, 0);  runMotor(id8, -joint2, 0, 40, 2, 0);      
+      delay(50);
+    }
+    for (int j=0 ; j<100 ; j++)
+    {
+      runMotor(id1, -last1, 0, 40, 2, 0);  runMotor(id3, -last1, 0, 40, 2, 0);
+      runMotor(id5, last1, 0, 40, 2, 0);   runMotor(id7, last1, 0, 40, 2, 0);
+      runMotor(id2, last2, 0, 40, 2, 0);   runMotor(id4, last2, 0, 40, 2, 0);
+      runMotor(id6, -last2, 0, 40, 2, 0);  runMotor(id8, -last2, 0, 40, 2, 0);
+      delay(50);
+    }
+  delay(2000);
+  
+  Serial.println('-------offMotor-------');
+  offMotor(id1); offMotor(id2);
+  offMotor(id3); offMotor(id4);
+  offMotor(id5); offMotor(id6);
+  offMotor(id7); offMotor(id8);
+}
