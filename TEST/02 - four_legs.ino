@@ -106,6 +106,7 @@ void loop() {
       delay(50);
     }
   delay(2000);
+  }
   
   Serial.println('-------offMotor-------');
   offMotor(id1); offMotor(id2);
